@@ -1,0 +1,3 @@
+img1,img2,label,group
+D:/privacy-face-recog/image1.jpg,D:/privacy-face-recog/image1.jpg,1,group_a
+D:/privacy-face-recog/image1.jpg,D:/privacy-face-recog/image2.jpg,0,group_a

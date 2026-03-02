@@ -1,0 +1,32 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+
+# Virtual environments
+.venv/
+.venv312/
+.venv312-py312/
+
+# Node / frontend
+frontend/node_modules/
+frontend/dist/
+
+# Env / secrets
+.env
+.env.*
+
+# Local DB and runtime artifacts
+*.db
+*.sqlite
+*.sqlite3
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/

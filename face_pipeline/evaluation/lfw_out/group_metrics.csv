@@ -1,0 +1,5 @@
+group,num_pairs,far,frr
+proxy_bucket_0,250,0.01,0.0
+proxy_bucket_1,250,0.01,0.013333333333333334
+proxy_bucket_2,250,0.01,0.006666666666666667
+proxy_bucket_3,250,0.01,0.006666666666666667
