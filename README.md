@@ -1,5 +1,93 @@
 # Privacy-Preserving Face Recognition System
 
+End-to-end privacy-first face recognition project with:
+
+- Face enrollment and verification APIs (FastAPI)
+- Webcam-based user registration and live unlock UI (React)
+- Consent-aware storage with revocation and hard deletion
+- Evaluation pipeline with FAR/FRR/EER reporting
+
+## Local Setup (Recommended)
+
+This section is the fastest way for someone else to run the project locally.
+
+### Prerequisites
+
+- **Python 3.12.x** (important: avoid Python 3.13 for this stack)
+- **Node.js 18+** and npm
+- Git
+
+### 1) Clone
+
+```powershell
+git clone https://github.com/shdowshogan/privacy-face-recognition.git
+cd privacy-face-recognition
+```
+
+### 2) Create and activate Python environment (Windows PowerShell)
+
+```powershell
+py -3.12 -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install --upgrade pip
+```
+
+### 3) Install backend dependencies
+
+```powershell
+pip install -r requirements.txt
+```
+
+### 4) Run backend API
+
+From repo root:
+
+```powershell
+python -m uvicorn backend.main:app --host 0.0.0.0 --port 8000 --reload
+```
+
+API endpoints/docs:
+
+- Swagger UI: `http://127.0.0.1:8000/docs`
+- Health check: `http://127.0.0.1:8000/health`
+
+### 5) Run frontend
+
+Open a second terminal:
+
+```powershell
+cd frontend
+npm install
+npm run dev
+```
+
+Open:
+
+- `http://127.0.0.1:5173`
+
+The frontend defaults to `http://127.0.0.1:8000` as API base, so no extra config is needed for local development.
+
+### 6) Local user flow to test
+
+1. Step 1: Register face (camera capture or upload), provide user ID and consent.
+2. Step 2: Click **Start Live Camera** and view live verification score/status.
+3. Optional: Enable Admin Mode for consent management and metrics.
+
+## Optional Local Add-ons
+
+If you want to run the dataset evaluation scripts and desktop OpenCV realtime script, install:
+
+```powershell
+pip install scikit-learn matplotlib opencv-python
+```
+
+## Troubleshooting
+
+- **`py -3.12` not found**: install Python 3.12 and ensure the Python launcher is installed.
+- **Camera not starting in browser**: allow webcam permission for `http://127.0.0.1:5173`.
+- **CORS/API errors**: ensure backend is running on port `8000` and frontend API base matches.
+- **Slow first inference**: first model load can take longer; subsequent requests are faster.
+
 ## Ethical Design Choices
 
 - **No raw face images stored**: The system never persists raw face images at any stage.
