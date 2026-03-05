@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 
-const DEFAULT_API = 'http://127.0.0.1:8000'
+const DEFAULT_API = import.meta.env.VITE_API_BASE || 'http://127.0.0.1:8000'
 
 async function parseJson(response) {
   const text = await response.text()

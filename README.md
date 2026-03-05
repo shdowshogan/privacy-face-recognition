@@ -14,6 +14,27 @@
 
 These principles are foundational and enforced throughout the system design and implementation.
 
+## GitHub Pages Deployment (Frontend)
+
+This project supports GitHub Pages deployment for the React frontend.
+
+Important: GitHub Pages is static hosting only. The FastAPI backend must be hosted separately (Render/Railway/Fly.io/etc.).
+
+### What is configured
+
+- Vite production base path for this repo: `/privacy-face-recognition/`
+- GitHub Actions workflow: `.github/workflows/deploy-frontend-pages.yml`
+- Frontend API URL via `VITE_API_BASE` variable
+
+### One-time GitHub setup
+
+1. Push latest code to `main`.
+2. In GitHub repo settings, go to **Settings → Pages** and set **Build and deployment** source to **GitHub Actions**.
+3. In **Settings → Secrets and variables → Actions → Variables**, add:
+	- `VITE_API_BASE` = your public backend URL (for example, `https://your-backend-domain.com`).
+
+After this, each push affecting `frontend/**` triggers deployment automatically.
+
 ## Next Step (Phase 2: Evaluation)
 
 The immediate next milestone is metrics and fairness evaluation.
