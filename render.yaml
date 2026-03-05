@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: privacy-face-recognition-api
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn backend.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    autoDeploy: true
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.3
+      - key: CORS_ALLOWED_ORIGINS
+        value: http://127.0.0.1:5173,http://localhost:5173,https://shdowshogan.github.io

@@ -17,6 +17,24 @@ From repository root:
 .\.venv312-py312\Scripts\python.exe -m uvicorn backend.main:app --host 0.0.0.0 --port 8000 --reload
 ```
 
+## Deploy (Render)
+
+This repo includes:
+
+- `render.yaml` (service definition)
+- `requirements.txt` (Python dependencies)
+- `runtime.txt` (Python runtime)
+
+Render start command:
+
+```bash
+uvicorn backend.main:app --host 0.0.0.0 --port $PORT
+```
+
+Health check path:
+
+- `/health`
+
 Open docs:
 
 - `http://127.0.0.1:8000/docs`

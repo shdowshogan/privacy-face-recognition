@@ -1,4 +1,5 @@
 import json
+import os
 from pathlib import Path
 
 import numpy as np
@@ -14,13 +15,23 @@ from face_pipeline.privacy_store import PrivacyStore
 
 app = FastAPI(title="Privacy-Preserving Face Recognition API", version="0.1.0")
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=[
+
+def get_allowed_origins():
+    default_origins = [
         "http://127.0.0.1:5173",
         "http://localhost:5173",
         "https://shdowshogan.github.io",
-    ],
+    ]
+    env_value = os.getenv("CORS_ALLOWED_ORIGINS", "").strip()
+    if not env_value:
+        return default_origins
+
+    parsed = [origin.strip() for origin in env_value.split(",") if origin.strip()]
+    return parsed if parsed else default_origins
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=get_allowed_origins(),
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -52,6 +63,11 @@ def read_image_from_upload(upload: UploadFile):
 @app.get("/")
 def root():
     return {"status": "ok", "service": "privacy-face-recognition-api"}
+
+
+@app.get("/health", include_in_schema=False)
+def health():
+    return {"status": "healthy"}
 
 
 @app.get("/favicon.ico", include_in_schema=False)

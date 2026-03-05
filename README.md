@@ -35,6 +35,31 @@ Important: GitHub Pages is static hosting only. The FastAPI backend must be host
 
 After this, each push affecting `frontend/**` triggers deployment automatically.
 
+## Backend Deployment (Render)
+
+Backend deployment is configured for Render using `render.yaml` and `requirements.txt`.
+
+### What is configured
+
+- Render blueprint file: `render.yaml`
+- Python runtime: `runtime.txt`
+- Health endpoint: `GET /health`
+- CORS origins configurable via `CORS_ALLOWED_ORIGINS`
+
+### Deploy steps
+
+1. In Render, click **New +** → **Blueprint**.
+2. Connect this GitHub repo and select the branch (`main`).
+3. Render reads `render.yaml` and creates web service `privacy-face-recognition-api`.
+4. Wait for deploy to complete and copy the public backend URL.
+
+### Connect deployed backend to GitHub Pages frontend
+
+1. In GitHub repo settings: **Settings → Secrets and variables → Actions → Variables**.
+2. Set/update:
+	- `VITE_API_BASE` = your Render backend URL (for example, `https://privacy-face-recognition-api.onrender.com`).
+3. Re-run or re-trigger the Pages workflow so frontend rebuilds with the new API base.
+
 ## Next Step (Phase 2: Evaluation)
 
 The immediate next milestone is metrics and fairness evaluation.
